@@ -4,11 +4,11 @@ using UI.Models;
 
 namespace UI.Controllers
 {
-    public class HomeController : Controller
+    public class CustomerInformationController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<CustomerInformationController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public CustomerInformationController(ILogger<CustomerInformationController> logger)
         {
             _logger = logger;
         }

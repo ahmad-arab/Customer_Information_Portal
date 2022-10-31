@@ -16,3 +16,29 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+fieldset, legend {
+    all: revert;
+    margin: -8px;
+    padding: 0 10px 10px;
+    border: 1px solid #d0d0bf;
+    border-radius: 5px;
+    padding-top: 10px;
+}
+
+legend {
+    all: revert;
+    padding: 2px 4px;
+    background: #fff;
+    color: #0046d5;
+    font-size: 18px;
+}
+
+fieldset > legend {
+    float: left;
+    margin-top: -25px;
+}
+
+    fieldset > legend + * {
+        clear: both;
+    }
