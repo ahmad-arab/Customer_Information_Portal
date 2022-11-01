@@ -8,8 +8,8 @@
             <fieldset>
                 <legend>Customers</legend>
                 <div class="d-flex flex-column">
-                    <button type="button" class="btn btn-light text-start mt-1 mb-1" style="border-radius:revert; border-color:#7697d3; color:#727272; background-color:white; font-weight:400">John Kabir</button>
-                    <button type="button" class="btn btn-light text-start mt-1 mb-1" style="border-radius:revert; border-color:#7697d3; color:#727272; background-color:white; font-weight:400">Another Name</button>
+                    <button type="button" class="btn btn-light text-start mt-1 mb-1" style="border-radius:revert; border-color:#7697d3; color:#727272; background-color:white; font-weight:400;font-size:10px; ">John Kabir</button>
+                    <button type="button" class="btn btn-light text-start mt-1 mb-1" style="border-radius:revert; border-color:#7697d3; color:#727272; background-color:white; font-weight:400;font-size:10px;">Another Name</button>
                 </div>
             </fieldset>
              
@@ -19,11 +19,21 @@
                 <legend></legend>
                 <fieldset style="margin:revert; margin-left:-5px; margin-top:0px;">
                     <legend>Actions</legend>
-                    <div>
-                        <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-primary">Delete</button>
-                        <button type="button" class="btn btn-primary">Cancle</button>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-auto">
+                                <button type="button" class="button-15"  style="font-size:10px">Edit</button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="button-15" style="font-size:10px">Save</button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="button-15" style="font-size:10px">Delete</button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="button-15" style="font-size:10px">Cancle</button>
+                            </div>
+                        </div>                                              
                     </div>
                 </fieldset>
 
@@ -36,7 +46,7 @@
                                 <label style="margin:2px; color:#4673c8;">NAME:</label>
                             </div>
                             <div class="col-auto" style="display:table-cell;">
-                                <input type="text" class="form-control"  placeholder="Enter Name Text" style="background-color:white; border-radius:revert; border-color:#4673c8; color:#4673c8;font-size:12px; padding:revert; margin:2px;" />
+                                <input type="text" class="form-control"  placeholder="Enter Name Text" style="background-color:white; border-radius:revert; border-color:#4673c8; color:#4673c8;font-size:10px; padding:revert; margin:2px;" />
                             </div>
                         </div>
                         <div class="row" style="display:table-row">
@@ -44,7 +54,7 @@
                                 <label style="margin:2px; color:#4673c8;">FATHER NAME:</label>
                             </div>
                             <div class="col-auto" style="display:table-cell;">
-                                <input type="text" class="form-control"  placeholder="Enter Name Text" style="background-color:white; border-radius:revert; border-color:#4673c8; color:#4673c8;font-size:12px; padding:revert; margin:2px;" />
+                                <input type="text" class="form-control"  placeholder="Enter Name Text" style="background-color:white; border-radius:revert; border-color:#4673c8; color:#4673c8;font-size:10px; padding:revert; margin:2px;" />
                             </div>
                         </div>  
                         <div class="row" style="display:table-row">
@@ -52,7 +62,7 @@
                                 <label style="margin:2px; color:#4673c8;">MOTHER NAME:</label>
                             </div>
                             <div class="col-auto" style="display:table-cell;">
-                                <input type="text" class="form-control"  placeholder="Enter Name Text" style="background-color:white; border-radius:revert; border-color:#4673c8; color:#4673c8;font-size:12px; padding:revert; margin:2px;" />
+                                <input type="text" class="form-control"  placeholder="Enter Name Text" style="background-color:white; border-radius:revert; border-color:#4673c8; color:#4673c8;font-size:10px; padding:revert; margin:2px;" />
                             </div>
                         </div>  
                         <div class="row" style="display:table-row">
@@ -62,17 +72,17 @@
                             <div class="col-auto" style="display:table-cell;">
                                 <div class="container-fluid">
                                     <div class="row" style="padding-left:0px">
-                                        <div class="col" style="padding-left:1px">
-                                            <input type="radio" style="margin-left:3px;" class="form-check-input" checked/>
-                                            <label style="color:#4673c8;">SINGLE</label>
+                                        <div class="col-auto" style="padding-left:1px">
+                                            <input type="radio" style="margin-left:-6px; margin-right:10px;" name="radio" class="form-check-input" checked/>
+                                            <label style="color:#4673c8; font-size:10px; margin-left:-10px; margin-top:-6px; margin-right:5px;" class="form-check-label">SINGLE</label>
                                         </div>
-                                        <div class="col" style="padding-left:1px">
-                                            <input type="radio" style="margin-left:3px;" class="form-check-input" />
-                                            <label style="color:#4673c8;">MARRIED</label>
+                                        <div class="col-auto" style="padding-left:1px">
+                                            <input type="radio" style="margin-left:-6px; margin-right:10px;" name="radio" class="form-check-input" />
+                                            <label style="color:#4673c8; font-size:10px; margin-left:-10px; margin-top:-6px; margin-right:5px;" class="form-check-label">MARRIED</label>
                                         </div>
-                                        <div class="col" style="padding-left:1px">
-                                            <input type="radio" style="margin-left:3px;" class="form-check-input" />
-                                            <label style="color:#4673c8;">OTHERS</label>
+                                        <div class="col-auto" style="padding-left:1px">
+                                            <input type="radio" style="margin-left:-6px; margin-right:10px;" name="radio" class="form-check-input" />
+                                            <label style="color:#4673c8; font-size:10px; margin-left:-10px; margin-top:-6px; margin-right:5px;" class="form-check-label">OTHERS</label>
                                         </div>
                                     </div>
                                 </div>
@@ -83,21 +93,41 @@
                                 <label style="margin:2px; color:#4673c8;">COUNTRY:</label>
                             </div>
                             <div class="col-auto" style="display:table-cell;">
-                                <select class="form-select"  placeholder="Enter Text" style="background-color:white; border-radius:revert; border-color:#4673c8; color:#4673c8;font-size:12px; padding:revert; margin:2px;">
+                                <input list="country" class="form-control"  placeholder="Enter Text" style="background-color:white; border-radius:revert; border-color:#4673c8; color:#4673c8;font-size:10px; padding:revert; margin:2px;">
+                                    <datalist id="country">
                                     @for(int i = 0;i<10;i++)
                                     {
-                                        <option value="1">Choice @i.ToString()</option>
+                                        <option value="Choice @i.ToString()"></option>
                                     }
-                                </select>
+                                    </datalist>
                             </div>
                         </div>  
                         <div class="row" style="display:table-row">
                             <div class="col-auto" style="display:table-cell">
                                 <label style="margin:2px; color:#4673c8;">PHOTO:</label>
-                                <input type="image" class="form-control"  placeholder="Enter Name Text" style="background-color:white; border-radius:revert; border-color:#4673c8; color:#4673c8;font-size:12px; padding:revert; margin:2px;" />
+                                
+                            </div>
+                            <div class="col-auto" style="display:table-cell;">
+                                <input type="image" class="form-control"  placeholder="Enter Name Text" style="background-color:white; border-radius:revert; border-color:#4673c8; color:#4673c8;font-size:10px; padding:revert; margin:2px;" />
                             </div>
                         </div>  
                     </div>
+                </fieldset>
+
+                <fieldset style="margin:revert; margin-left:-5px; margin-top:10px; padding-right:20px;">
+                    <legend>Other Infomation</legend>
+                    <button type="button" class="button-15"  style="font-size:10px; margin-left:10px;">Add</button>
+                    <table id="infoTable" class="table border border-dark text-center table-bordered" style="margin:10px;">
+                        <thead>
+                            <tr>
+                                <td>
+                                    <label  style="font-size:10px; color:#4673c8;font-weight:600">Address</label>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
                 </fieldset>
 
             </fieldset>
