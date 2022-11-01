@@ -9,6 +9,6 @@ function addRow(tableID) {
     var row = table.insertRow(rowCount);
     //Column 1.
     var cell1 = row.insertCell(0);
-    var element1 = document.createElement(“input”);
-    element1.type = “button”;
+    var element1 = document.createElement("input");
+    element1.type = "button";
 }
