@@ -28,8 +28,8 @@ namespace Models.Model
 
         [ForeignKey("CountryId")]
         [InverseProperty("Customers")]
-        public virtual Country Country { get; set; } = null!;
+        public virtual Country? Country { get; set; } = null!;
         [InverseProperty("Customer")]
-        public virtual ICollection<CustomerAddress> CustomerAddresses { get; set; }
+        public virtual ICollection<CustomerAddress>? CustomerAddresses { get; set; }
     }
 }

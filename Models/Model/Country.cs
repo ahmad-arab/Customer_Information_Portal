@@ -20,6 +20,6 @@ namespace Models.Model
         public string CountryName { get; set; } = null!;
 
         [InverseProperty("Country")]
-        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual ICollection<Customer>? Customers { get; set; }
     }
 }

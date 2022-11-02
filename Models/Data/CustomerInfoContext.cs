@@ -25,8 +25,8 @@ namespace Models.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Database=CustomerInfo;Integrated Security=True;Persist Security Info=False;TrustServerCertificate=False");
+                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Database=CustomerInfo;Integrated Security=True;Persist Security Info=False;TrustServerCertificate=False");
             }
         }
 
@@ -37,7 +37,7 @@ namespace Models.Data
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.Customers)
                     .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Customer_Country");
             });
 
@@ -46,7 +46,7 @@ namespace Models.Data
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.CustomerAddresses)
                     .HasForeignKey(d => d.CustomerId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_CustomerAddress_Customer");
             });
 
