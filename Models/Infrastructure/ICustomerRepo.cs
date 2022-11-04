@@ -10,6 +10,7 @@ namespace Models.Infrastructure
     public interface ICustomerRepo
     {
         Task<List<Customer>> GetAllAsync();
+        Task<List<Country>> GetAllCountriesAsync();
         Task<Customer?> GetByIdAsync(int id);
         void Delete(int id);
         void Update(Customer customer);

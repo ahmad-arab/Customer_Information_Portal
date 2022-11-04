@@ -48,15 +48,22 @@ namespace Models.Service
         public void Insert(Customer customer)
         {
             _customerInfoContext.Customers.Add(customer);
+            _customerInfoContext.Countries.Attach(customer.Country);
         }
 
         public void Update(Customer customer)
         {
             _customerInfoContext.Customers.Update(customer);
+            _customerInfoContext.Countries.Attach(customer.Country);
         }
         public async Task SaveAsync()
         {
             await _customerInfoContext.SaveChangesAsync();
+        }
+
+        public async Task<List<Country>> GetAllCountriesAsync()
+        {
+            return await _customerInfoContext.Countries.ToListAsync();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Models.Model
     {
         public Country()
         {
-            Customers = new HashSet<Customer>();
+            Customers = new List<Customer>();
         }
 
         [Key]
@@ -20,6 +20,6 @@ namespace Models.Model
         public string CountryName { get; set; } = null!;
 
         [InverseProperty("Country")]
-        public virtual ICollection<Customer>? Customers { get; set; }
+        public virtual List<Customer>? Customers { get; set; }
     }
 }

@@ -1,38 +1,63 @@
-﻿@{
+﻿@model UI.Models.CustomerInformationViewModel
+@{
     ViewData["Title"] = "Customer Information From";
 }
+@if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
 
+<form enctype="multipart/form-data" action="" method="post">
 <div class="container-fluid mt-3">
     <div class="row mt-3">
-        <div class="col-3">
+        <div class="col-auto" style="display:flex; padding-right:0px;">
             <fieldset>
                 <legend>Customers</legend>
                 <div class="d-flex flex-column">
-                    <button type="button" class="btn btn-light text-start mt-1 mb-1" style="border-radius:revert; border-color:#7697d3; color:#727272; background-color:white; font-weight:400;font-size:10px; ">John Kabir</button>
-                    <button type="button" class="btn btn-light text-start mt-1 mb-1" style="border-radius:revert; border-color:#7697d3; color:#727272; background-color:white; font-weight:400;font-size:10px;">Another Name</button>
+                    <input type="submit" value="Add Customer" formaction="CustomerInformation/Index" class="btn btn-light text-start mt-1 mb-1 customer-button" style="background-color:#4673c8;color:black"/>
+                    @for(int i = 0;i<Model.Customers.Count();i++)
+                    {
+                        <button type="submit" formaction="CustomerInformation/GoToCustomer/@Model.Customers[i].Id" class="btn btn-light text-start mt-1 mb-1 customer-button">@Model.Customers[i].CustomerName</button>
+                    }              
                 </div>
             </fieldset>
              
         </div>
-        <div class="col-9">
+        <div class="col" style="padding-left:0px">
             <fieldset>
                 <legend></legend>
                 <fieldset style="margin:revert; margin-left:-5px; margin-top:0px;">
                     <legend>Actions</legend>
                     <div class="container">
                         <div class="row">
-                            <div class="col-auto">
-                                <button type="button" class="button-15"  style="font-size:10px">Edit</button>
-                            </div>
-                            <div class="col-auto">
-                                <button type="button" class="button-15" style="font-size:10px">Save</button>
-                            </div>
-                            <div class="col-auto">
-                                <button type="button" class="button-15" style="font-size:10px">Delete</button>
-                            </div>
-                            <div class="col-auto">
-                                <button type="button" class="button-15" style="font-size:10px">Cancle</button>
-                            </div>
+                            @if (Model.State == 2)
+                            {
+                                <div class="col-auto">
+                                    <input type="submit" value="Edit" formaction="CustomerInformation/EditCustomer/@Model.ChosenCustomer.Id" class="button-15"/>
+                                </div>
+                            }
+                            @if (Model.State == 0 || Model.State == 1)
+                            {
+                                <div class="col-auto">
+                                    <input type="submit" value="Save" formaction="CustomerInformation/SaveCustomer" class="button-15"/>
+                                </div>
+                            }
+                            @if (Model.State == 2)
+                            {
+                                <div class="col-auto">
+                                    <input type="submit" value="Delete" formaction="CustomerInformation/DeleteCustomer/@Model.ChosenCustomer.Id" class="button-15"/>
+                                </div>
+                            }
+                            @if (Model.State == 1)
+                            {
+                                <div class="col-auto">
+                                    <input type="submit" value="Cancle" formaction="CustomerInformation/GoToCustomer/@Model.ChosenCustomer.Id" class="button-15"/>
+                                </div>
+                            }
                         </div>                                              
                     </div>
                 </fieldset>
@@ -43,46 +68,91 @@
                     <div class="container-fluid text-start" style="display:table">
                         <div class="row" style="display:table-row">
                             <div class="col-auto" style="display:table-cell;">
-                                <label style="margin:2px; color:#4673c8;">NAME:</label>
+                                <label class="mlabel">NAME:</label>
                             </div>
                             <div class="col-auto" style="display:table-cell;">
-                                <input type="text" class="form-control"  placeholder="Enter Name Text" style="background-color:white; border-radius:revert; border-color:#4673c8; color:#4673c8;font-size:10px; padding:revert; margin:2px;" />
+                                @if(Model.State == 2)
+                                {
+                                    <label class="mlabel">@Model.ChosenCustomer.CustomerName</label>
+                                }
+                                else
+                                {
+                                    <input asp-for="@Model.ChosenCustomer.CustomerName" type="text" class="form-control mtextbox"  placeholder="Enter Name Text"/>
+                                }
                             </div>
                         </div>
                         <div class="row" style="display:table-row">
                             <div class="col-auto" style="display:table-cell">
-                                <label style="margin:2px; color:#4673c8;">FATHER NAME:</label>
+                                <label class="mlabel">FATHER NAME:</label>
                             </div>
                             <div class="col-auto" style="display:table-cell;">
-                                <input type="text" class="form-control"  placeholder="Enter Name Text" style="background-color:white; border-radius:revert; border-color:#4673c8; color:#4673c8;font-size:10px; padding:revert; margin:2px;" />
+                                @if (Model.State == 2)
+                                {
+                                    <label class="mlabel">@Model.ChosenCustomer.FatherName</label>
+                                }
+                                else
+                                {
+                                    <input asp-for="@Model.ChosenCustomer.FatherName" type="text" class="form-control mtextbox"  placeholder="Enter Name Text"/>
+                                }
                             </div>
                         </div>  
                         <div class="row" style="display:table-row">
                             <div class="col-auto" style="display:table-cell">
-                                <label style="margin:2px; color:#4673c8;">MOTHER NAME:</label>
+                                <label class="mlabel">MOTHER NAME:</label>
                             </div>
                             <div class="col-auto" style="display:table-cell;">
-                                <input type="text" class="form-control"  placeholder="Enter Name Text" style="background-color:white; border-radius:revert; border-color:#4673c8; color:#4673c8;font-size:10px; padding:revert; margin:2px;" />
+                                @if(Model.State ==2)
+                                {
+                                    <label class="mlabel">@Model.ChosenCustomer.MotherName</label>
+                                }
+                                else
+                                {
+                                    <input asp-for="@Model.ChosenCustomer.MotherName" type="text" class="form-control mtextbox"  placeholder="Enter Name Text"/>
+                                }
                             </div>
                         </div>  
                         <div class="row" style="display:table-row">
                             <div class="col-auto" style="display:table-cell">
-                                <label style="margin:2px; color:#4673c8;">MARITAL STATUS:</label>
+                                <label class="mlabel">MARITAL STATUS:</label>
                             </div>
                             <div class="col-auto" style="display:table-cell;">
                                 <div class="container-fluid">
                                     <div class="row" style="padding-left:0px">
                                         <div class="col-auto" style="padding-left:1px">
-                                            <input type="radio" style="margin-left:-6px; margin-right:10px;" name="radio" class="form-check-input" checked/>
-                                            <label style="color:#4673c8; font-size:10px; margin-left:-10px; margin-top:-6px; margin-right:5px;" class="form-check-label">SINGLE</label>
+                                            @if(Model.State == 2)
+                                            {
+                                                if(Model.ChosenCustomer.MaritalStatus == 0)
+                                                {
+                                                    <label class="mlabel" style="margin-left:-10px;">Single</label>
+                                                }
+                                                else if(Model.ChosenCustomer.MaritalStatus == 1)
+                                                {
+                                                    <label class="mlabel" style="margin-left:-10px;">Married</label>
+                                                }
+                                                else
+                                                {
+                                                    <label class="mlabel" style="margin-left:-10px;">Others</label>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <input asp-for="@Model.ChosenCustomer.MaritalStatus" value="0" type="radio" name="radio" class="form-check-input mradio" checked/>
+                                                <label class="form-check-label radiolabel">SINGLE</label>
+                                            }
                                         </div>
                                         <div class="col-auto" style="padding-left:1px">
-                                            <input type="radio" style="margin-left:-6px; margin-right:10px;" name="radio" class="form-check-input" />
-                                            <label style="color:#4673c8; font-size:10px; margin-left:-10px; margin-top:-6px; margin-right:5px;" class="form-check-label">MARRIED</label>
+                                            @if (Model.State != 2)
+                                            {
+                                                <input asp-for="@Model.ChosenCustomer.MaritalStatus" value="1" type="radio" name="radio" class="form-check-input mradio" />
+                                                <label class="form-check-label radiolabel">MARRIED</label>
+                                            }
                                         </div>
                                         <div class="col-auto" style="padding-left:1px">
-                                            <input type="radio" style="margin-left:-6px; margin-right:10px;" name="radio" class="form-check-input" />
-                                            <label style="color:#4673c8; font-size:10px; margin-left:-10px; margin-top:-6px; margin-right:5px;" class="form-check-label">OTHERS</label>
+                                            @if (Model.State != 2)
+                                            {
+                                                <input asp-for="@Model.ChosenCustomer.MaritalStatus" value="2" type="radio" name="radio" class="form-check-input mradio" />
+                                                <label class="form-check-label radiolabel">OTHERS</label>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -90,25 +160,46 @@
                         </div>  
                         <div class="row" style="display:table-row">
                             <div class="col-auto" style="display:table-cell">
-                                <label style="margin:2px; color:#4673c8;">COUNTRY:</label>
+                                <label class="mlabel">COUNTRY:</label>
                             </div>
                             <div class="col-auto" style="display:table-cell;">
-                                <input list="country" class="form-control"  placeholder="Enter Text" style="background-color:white; border-radius:revert; border-color:#4673c8; color:#4673c8;font-size:10px; padding:revert; margin:2px;">
-                                    <datalist id="country">
-                                    @for(int i = 0;i<10;i++)
+                                @if(Model.State == 2)
+                                {
+                                        
+                                        <label class="mlabel">@Model.ChosenCustomer.Country.CountryName</label>
+                                }
+                                else
+                                {
+                                    Model.ChosenCustomer.Country = new Models.Model.Country();
+                                    <select asp-for="@Model.ChosenCustomer.Country.CountryName" class="mdb-select md-select2">
+                                    @if (Model.State == 0)
                                     {
-                                        <option value="Choice @i.ToString()"></option>
+                                        <option value="" disabled selected>Enter Text</option>
                                     }
-                                    </datalist>
+                                    @for(int i = 0;i<Model.Countries.Count();i++)
+                                    {
+
+                                        <option value="@Model.Countries[i].CountryName">@Model.Countries[i].CountryName</option>
+                                    }
+                                    </select>
+                                }
                             </div>
                         </div>  
                         <div class="row" style="display:table-row">
                             <div class="col-auto" style="display:table-cell">
-                                <label style="margin:2px; color:#4673c8;">PHOTO:</label>
+                                <label class="mlabel">PHOTO:</label>
                                 
                             </div>
                             <div class="col-auto" style="display:table-cell;">
-                                <input type="image" class="form-control"  placeholder="Enter Name Text" style="background-color:white; border-radius:revert; border-color:#4673c8; color:#4673c8;font-size:10px; padding:revert; margin:2px;" />
+                                @if(Model.State == 2)
+                                {
+                                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.ChosenCustomer.CustomerPhoto)"
+                                        width="100" height="100" />
+                                }
+                                else
+                                {
+                                    <input asp-for="@Model.Img" type="file" class="form-control fileinput"/>
+                                }
                             </div>
                         </div>  
                     </div>
@@ -116,8 +207,11 @@
 
                 <fieldset style="margin:revert; margin-left:-5px; margin-top:10px; padding-right:20px;">
                     <legend>Other Infomation</legend>
-                    <button type="button" class="button-15"  style="font-size:10px; margin-left:10px;">Add</button>
-                    <table id="infoTable" class="table border border-dark text-center table-bordered" style="margin:10px;">
+                        @if (Model.State != 2)
+                        {
+                            <button id="btnAdd" value="Add" type="button" class="button-15" style="font-size:10px; margin-left:10px;">Add</button>
+                        }
+                        <table id="infoTable" class="table border border-dark text-center table-bordered" style="margin:10px;">
                         <thead>
                             <tr>
                                 <td>
@@ -127,6 +221,56 @@
                                 </td>
                             </tr>
                         </thead>
+                        <tbody>
+                            @if(Model.State==2)
+                            {
+                                @for (int i = 0; i < Model.ChosenCustomer.CustomerAddresses.Count(); i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            <label class="mlabel">@Model.ChosenCustomer.CustomerAddresses[i].CustomerAddress1</label>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                @if (Model.State == 0)
+                                {
+                                        <tr>
+                                            <td align="center">
+                                                @if(true)
+                                                {
+                                                    Model.ChosenCustomer.CustomerAddresses.Add(new Models.Model.CustomerAddress());
+                                                    
+                                                    <input asp-for="@Model.ChosenCustomer.CustomerAddresses[0].CustomerAddress1"
+                                                        type="text" class="form-control mtextbox"  placeholder="Enter Address"/>
+                                                }
+                                            </td>
+                                        <td align="center" width="65px">
+                                            <button type="button" class="button-15" style="margin:0px;" onclick="Remove(this)">Delete</button>
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.State == 1)
+                                {
+                                    @for (int i = 0; i < Model.ChosenCustomer.CustomerAddresses.Count(); i++)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <input asp-for="@Model.ChosenCustomer.CustomerAddresses[i].CustomerAddress1" 
+                                                    type="text" class="form-control mtextbox"  placeholder="Enter Address"/>
+                                            </td>
+                                            <td>
+                                                <button type="button"  style="margin:0px;" class="button-15"  onclick="Remove(this)">Delete</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
                     </table>
                 </fieldset>
 
@@ -134,3 +278,113 @@
         </div>
     </div>
 </div>
+    @if (Model.State == 0)
+    {
+        <input id="hiddenInput" value="0" hidden/>
+    }
+    @if (Model.State == 1)
+    {
+        <input id="hiddenInput" value="@(Model.ChosenCustomer.CustomerAddresses.Count()-1)" hidden/>
+    }
+</form>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+        $("body").on("click", "#btnAdd", function () {
+ 
+            //Get the reference of the Table's TBODY element.
+            var tBody = $("#infoTable > TBODY")[0];
+ 
+            //Add Row.
+            var row = tBody.insertRow(-1);
+
+            //Add Object
+            @if (true)
+            {
+                Model.ChosenCustomer.CustomerAddresses.Add(new Models.Model.CustomerAddress());                
+            }
+            var hiddenElement = document.getElementById('hiddenInput');  
+            var value = parseInt(hiddenElement.getAttribute("value"), 10) + 1;
+            hiddenElement.setAttribute("value", value);
+ 
+            //Add Address cell.
+            var cell = $(row.insertCell(-1));
+            cell.attr("align","center")
+
+            var txtBox = $("<input />");
+            txtBox.attr("type", "text");
+            txtBox.attr("class", "form-control");
+            txtBox.addClass("mtextbox");
+            txtBox.attr("placeholder", "Enter Address");
+            txtBox.attr("data-val", "true");
+            txtBox.attr("data-val-length", "The field CustomerAddress1 must be a string with a maximum length of 500.");
+            txtBox.attr("data-val-length-max", "500");
+            //txtBox.attr("data-val-required", "The CustomerAddress1 field is required.");
+            txtBox.attr("id", "ChosenCustomer_CustomerAddresses_" + value.toString() + "__CustomerAddress1");
+            txtBox.attr("name", "ChosenCustomer.CustomerAddresses[" + value.toString() + "].CustomerAddress1");
+
+            cell.append(txtBox);
+
+ 
+            //Add Delete cell.
+            var cell = $(row.insertCell(-1));
+            cell.attr("align","center")
+            cell.attr("width","65px")
+
+            var btn = $("<input />");
+            btn.attr("type", "button");
+            btn.attr("class", "button-15");
+            btn.attr("style","margin:0px;")
+            btn.attr("onclick","Remove(this)")
+            btn.val("Delete")
+            cell.append(btn);
+
+        });
+ 
+        function Remove(button) {
+            //Determine the reference of the Row using the Button.
+            var row = $(button).closest("TR");
+            var table = $("#infoTable")[0];
+
+            var hiddenElement = document.getElementById('hiddenInput');  
+            var value = parseInt(hiddenElement.getAttribute("value"), 10) - 1;
+            hiddenElement.setAttribute("value", value);
+ 
+            //Delete the Table row using it's Index.
+            table.deleteRow(row[0].rowIndex);
+
+            //for (var i = 0, row; row = table.rows[i]; i++) {
+            //    var cell = row.cell[0];
+            //    var txtBox = cell.firstChild();
+            //    txtBox.setAttribute("id", "ChosenCustomer_CustomerAddresses_" + i.toString() + "__CustomerAddress1");
+            //    txtBox.setAttribute("name","ChosenCustomer.CustomerAddresses[" + i.toString() + "].CustomerAddress1")
+            //}
+                                   
+        };
+ 
+        $("body").on("click", "#btnSave", function () {
+            //Loop through the Table rows and build a JSON array.
+            var customers = new Array();
+            $("#tblCustomers TBODY TR").each(function () {
+                var row = $(this);
+                var customer = {};
+                customer.Name = row.find("TD").eq(0).html();
+                customer.Country = row.find("TD").eq(1).html();
+                customers.push(customer);
+            });
+ 
+            //Send the JSON array to Controller using AJAX.
+            $.ajax({
+                type: "POST",
+                url: "/Home/InsertCustomers",
+                data: JSON.stringify(customers),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    alert(r + " record(s) inserted.");
+                }
+            });
+        });
+    </script>
+                

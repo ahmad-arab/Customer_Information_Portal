@@ -18,6 +18,6 @@ namespace Models.Model
 
         [ForeignKey("CustomerId")]
         [InverseProperty("CustomerAddresses")]
-        public virtual Customer? Customer { get; set; } = null!;
+        public virtual Customer? Customer { get; set; } = null;
     }
 }

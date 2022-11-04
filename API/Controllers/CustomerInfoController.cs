@@ -25,6 +25,14 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [Route("getallcountries")]
+        public async Task<ActionResult<IEnumerable<Country>>> GetAllCountries()
+        {
+
+            return await _customerRepo.GetAllCountriesAsync();
+        }
+
+        [HttpGet]
         [Route("get/{id}")]
         public async Task<ActionResult<Customer?>> GetById(int id)
         {
