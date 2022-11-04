@@ -35,5 +35,6 @@ namespace UI.Models
         /// 2 = viewing a customer
         /// </summary>
         public int State { get; set; } = 0;
+
     }
 }

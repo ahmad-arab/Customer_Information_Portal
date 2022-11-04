@@ -95,6 +95,13 @@ namespace UI.Controllers
             }
             else
             {
+                using (var ms = new MemoryStream())
+                {
+                    civm.Img.CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    civm.ChosenCustomer.CustomerPhoto = fileBytes;
+                    //string s = Convert.ToBase64String(fileBytes);
+                }
                 await _dataService.UpdateCustomerAsync(civm.ChosenCustomer);
                 return RedirectToAction("Index", new { customerUpdated = true });
             }

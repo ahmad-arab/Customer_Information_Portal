@@ -53,17 +53,23 @@ namespace Models.Service
 
         public void Update(Customer customer)
         {
-
+            Customer temp = new Customer
+            {
+                 CustomerAddresses = new List<CustomerAddress>(customer.CustomerAddresses)
+            };
             _customerInfoContext.Customers.Update(customer);           
             _customerInfoContext.Countries.Attach(customer.Country);
+            _customerInfoContext.SaveChanges();
             List<CustomerAddress> existingAdress = _customerInfoContext.CustomerAddresses.Where(x => x.CustomerId == customer.Id).ToList();
-            _customerInfoContext.CustomerAddresses.RemoveRange(existingAdress);
-            foreach (CustomerAddress address in customer.CustomerAddresses)
-            {
-                address.Customer = customer;
-                _customerInfoContext.CustomerAddresses.Add(address);
-                _customerInfoContext.Customers.Attach(address.Customer);
-            }           
+            customer.CustomerAddresses = temp.CustomerAddresses;
+            _customerInfoContext.SaveChanges();
+            //_customerInfoContext.CustomerAddresses.RemoveRange(existingAdress);
+            //foreach (CustomerAddress address in temp.CustomerAddresses)
+            //{
+            //    address.Customer = customer;
+            //    _customerInfoContext.CustomerAddresses.Add(address);
+            //    _customerInfoContext.Customers.Attach(address.Customer);
+            //}           
         }
         public async Task SaveAsync()
         {
