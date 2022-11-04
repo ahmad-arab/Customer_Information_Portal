@@ -104,7 +104,7 @@ namespace UI.Controllers
         public async Task<IActionResult> EditCustomer(int id)=> RedirectToAction("Index", new { edit = true, editId = id });
         public async Task<IActionResult> DeleteCustomer(int id)
         {
-            _dataService.DeleteCustomerAsync(id);
+            await _dataService.DeleteCustomerAsync(id);
             return RedirectToAction("Index", new { customerDeleted = true });
         }
     }

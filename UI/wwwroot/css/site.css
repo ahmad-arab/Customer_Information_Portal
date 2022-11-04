@@ -198,16 +198,12 @@ fieldset > legend {
 }
 
 .mradio {
-    margin-left: -6px;
-    margin-right: 10px;
+
 }
 
 .radiolabel {
     color: #4673c8;
     font-size: 10px;
-    margin-left: -10px;
-    margin-top: -6px;
-    margin-right: 5px;
 }
 
 .fileinput {

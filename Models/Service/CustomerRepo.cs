@@ -53,8 +53,17 @@ namespace Models.Service
 
         public void Update(Customer customer)
         {
-            _customerInfoContext.Customers.Update(customer);
+
+            _customerInfoContext.Customers.Update(customer);           
             _customerInfoContext.Countries.Attach(customer.Country);
+            List<CustomerAddress> existingAdress = _customerInfoContext.CustomerAddresses.Where(x => x.CustomerId == customer.Id).ToList();
+            _customerInfoContext.CustomerAddresses.RemoveRange(existingAdress);
+            foreach (CustomerAddress address in customer.CustomerAddresses)
+            {
+                address.Customer = customer;
+                _customerInfoContext.CustomerAddresses.Add(address);
+                _customerInfoContext.Customers.Attach(address.Customer);
+            }           
         }
         public async Task SaveAsync()
         {

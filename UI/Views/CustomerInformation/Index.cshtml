@@ -116,42 +116,64 @@
                                 <label class="mlabel">MARITAL STATUS:</label>
                             </div>
                             <div class="col-auto" style="display:table-cell;">
-                                <div class="container-fluid">
-                                    <div class="row" style="padding-left:0px">
-                                        <div class="col-auto" style="padding-left:1px">
+                                <div style="">
+                                    <div class="" style="padding-left:20px;padding-top:8px ;display:flex; flex-direction:row">
+                                        <div class="form-check container" style="padding-left:1px">
                                             @if(Model.State == 2)
                                             {
                                                 if(Model.ChosenCustomer.MaritalStatus == 0)
                                                 {
-                                                    <label class="mlabel" style="margin-left:-10px;">Single</label>
+                                                    <label asp-for="@Model.ChosenCustomer.MaritalStatus" class="mlabel" style="margin-left:-20px;">Single</label>
                                                 }
                                                 else if(Model.ChosenCustomer.MaritalStatus == 1)
                                                 {
-                                                    <label class="mlabel" style="margin-left:-10px;">Married</label>
+                                                    <label asp-for="@Model.ChosenCustomer.MaritalStatus" class="mlabel" style="margin-left:-20px;">Married</label>
                                                 }
                                                 else
                                                 {
-                                                    <label class="mlabel" style="margin-left:-10px;">Others</label>
+                                                    <label asp-for="@Model.ChosenCustomer.MaritalStatus" class="mlabel" style="margin-left:-20px;">Others</label>
                                                 }
                                             }
-                                            else
-                                            {
-                                                <input asp-for="@Model.ChosenCustomer.MaritalStatus" value="0" type="radio" name="radio" class="form-check-input mradio" checked/>
-                                                <label class="form-check-label radiolabel">SINGLE</label>
-                                            }
+                                                else
+                                                {
+                                                    @if (Model.ChosenCustomer.MaritalStatus == 0)
+                                                    {
+                                                        <input asp-for="@Model.ChosenCustomer.MaritalStatus" value="0" type="radio" class="form-check-input mradio" checked/>
+                                                    }else
+                                                    {
+                                                        <input asp-for="@Model.ChosenCustomer.MaritalStatus" value="0" type="radio" class="form-check-input mradio"/>
+
+                                                    }
+                                                    <label class="form-check-label radiolabel" style="margin-top:-10px;">SINGLE</label>
+                                                }
                                         </div>
-                                        <div class="col-auto" style="padding-left:1px">
+                                        <div class="form-check container" style="padding-left:1px">
                                             @if (Model.State != 2)
                                             {
-                                                <input asp-for="@Model.ChosenCustomer.MaritalStatus" value="1" type="radio" name="radio" class="form-check-input mradio" />
-                                                <label class="form-check-label radiolabel">MARRIED</label>
+                                                    @if (Model.ChosenCustomer.MaritalStatus == 1)
+                                                    {
+                                                        <input asp-for="@Model.ChosenCustomer.MaritalStatus" value="1" type="radio"class="form-check-input mradio" checked/>
+                                                    }
+                                                    else
+                                                    {
+                                                        <input asp-for="@Model.ChosenCustomer.MaritalStatus" value="1" type="radio"class="form-check-input mradio"/>
+                                                    }
+                                                    <label class="form-check-label radiolabel">MARRIED</label>
                                             }
                                         </div>
-                                        <div class="col-auto" style="padding-left:1px">
+                                        <div class="form-check container" style="padding-left:1px">
                                             @if (Model.State != 2)
                                             {
-                                                <input asp-for="@Model.ChosenCustomer.MaritalStatus" value="2" type="radio" name="radio" class="form-check-input mradio" />
-                                                <label class="form-check-label radiolabel">OTHERS</label>
+                                                    @if (Model.ChosenCustomer.MaritalStatus == 1)
+                                                    {
+                                                        <input asp-for="@Model.ChosenCustomer.MaritalStatus" value="2" type="radio" class="form-check-input mradio" checked/>
+                                                    }
+                                                    else
+                                                    {
+                                                        <input asp-for="@Model.ChosenCustomer.MaritalStatus" value="2" type="radio" class="form-check-input mradio" />
+                                                        
+                                                    }
+                                                    <label class="form-check-label radiolabel">OTHERS</label>
                                             }
                                         </div>
                                     </div>
@@ -166,19 +188,21 @@
                                 @if(Model.State == 2)
                                 {
                                         
-                                        <label class="mlabel">@Model.ChosenCustomer.Country.CountryName</label>
+                                        <label asp-for="@Model.ChosenCustomer.Country.CountryName" class="mlabel">@Model.ChosenCustomer.Country.CountryName</label>
                                 }
                                 else
                                 {
-                                    Model.ChosenCustomer.Country = new Models.Model.Country();
                                     <select asp-for="@Model.ChosenCustomer.Country.CountryName" class="mdb-select md-select2">
                                     @if (Model.State == 0)
                                     {
                                         <option value="" disabled selected>Enter Text</option>
                                     }
+                                    else
+                                    {
+                                        <option value="@Model.ChosenCustomer.Country.CountryName" selected>@Model.ChosenCustomer.Country.CountryName</option>
+                                    }
                                     @for(int i = 0;i<Model.Countries.Count();i++)
                                     {
-
                                         <option value="@Model.Countries[i].CountryName">@Model.Countries[i].CountryName</option>
                                     }
                                     </select>
@@ -193,7 +217,7 @@
                             <div class="col-auto" style="display:table-cell;">
                                 @if(Model.State == 2)
                                 {
-                                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.ChosenCustomer.CustomerPhoto)"
+                                    <img asp-for="@Model.Img" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.ChosenCustomer.CustomerPhoto)"
                                         width="100" height="100" />
                                 }
                                 else
@@ -278,6 +302,9 @@
         </div>
     </div>
 </div>
+    <input asp-for="@Model.ChosenCustomer.Country.CountryName" hidden/>
+    <input asp-for="@Model.ChosenCustomer.Id" hidden/>
+    <input asp-for="@Model.State" hidden/>
     @if (Model.State == 0)
     {
         <input id="hiddenInput" value="0" hidden/>
@@ -354,12 +381,12 @@
             //Delete the Table row using it's Index.
             table.deleteRow(row[0].rowIndex);
 
-            //for (var i = 0, row; row = table.rows[i]; i++) {
-            //    var cell = row.cell[0];
-            //    var txtBox = cell.firstChild();
-            //    txtBox.setAttribute("id", "ChosenCustomer_CustomerAddresses_" + i.toString() + "__CustomerAddress1");
-            //    txtBox.setAttribute("name","ChosenCustomer.CustomerAddresses[" + i.toString() + "].CustomerAddress1")
-            //}
+            for (var i = 1, row; row = table.rows[i]; i++) {
+                var cell = row.cell[0];
+                var txtBox = cell.getElementByClassName("mtextbox");
+                txtBox.setAttribute("id", "ChosenCustomer_CustomerAddresses_" + (i-1).toString() + "__CustomerAddress1");
+                txtBox.setAttribute("name","ChosenCustomer.CustomerAddresses[" + (i-1).toString() + "].CustomerAddress1")
+            }
                                    
         };
  
