@@ -338,7 +338,7 @@
  
             //Add Address cell.
             var cell = $(row.insertCell(-1));
-            cell.attr("align","center")
+            cell.attr("align", "center");
 
             var txtBox = $("<input />");
             txtBox.attr("type", "text");
@@ -379,40 +379,19 @@
             var value = parseInt(hiddenElement.getAttribute("value"), 10) - 1;
             hiddenElement.setAttribute("value", value);
  
+            var rowIndex = row[0].rowIndex;
             //Delete the Table row using it's Index.
-            table.deleteRow(row[0].rowIndex);
+            table.deleteRow(rowIndex);
 
-            for (var i = 1, row; row = table.rows[i]; i++) {
-                var cell = row.cell[0];
-                var txtBox = cell.getElementByClassName("mtextbox");
-                txtBox.setAttribute("id", "ChosenCustomer_CustomerAddresses_" + (i-1).toString() + "__CustomerAddress1");
-                txtBox.setAttribute("name","ChosenCustomer.CustomerAddresses[" + (i-1).toString() + "].CustomerAddress1")
+            for (var i = rowIndex, row; row = table.rows[i]; i++) {
+                var txtBox = document.getElementById("ChosenCustomer_CustomerAddresses_" + (i).toString() + "__CustomerAddress1");
+                if (txtBox != null) 
+                { 
+                    txtBox.setAttribute("id", "ChosenCustomer_CustomerAddresses_" + (i-1).toString() + "__CustomerAddress1");
+                    txtBox.setAttribute("name", "ChosenCustomer.CustomerAddresses[" + (i - 1).toString() + "].CustomerAddress1");
+                }
             }
                                    
         };
- 
-        $("body").on("click", "#btnSave", function () {
-            //Loop through the Table rows and build a JSON array.
-            var customers = new Array();
-            $("#tblCustomers TBODY TR").each(function () {
-                var row = $(this);
-                var customer = {};
-                customer.Name = row.find("TD").eq(0).html();
-                customer.Country = row.find("TD").eq(1).html();
-                customers.push(customer);
-            });
- 
-            //Send the JSON array to Controller using AJAX.
-            $.ajax({
-                type: "POST",
-                url: "/Home/InsertCustomers",
-                data: JSON.stringify(customers),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (r) {
-                    alert(r + " record(s) inserted.");
-                }
-            });
-        });
     </script>
                 
