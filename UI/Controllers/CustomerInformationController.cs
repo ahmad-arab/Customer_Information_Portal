@@ -73,9 +73,15 @@ namespace UI.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveCustomer(CustomerInformationViewModel civm)
         {
-            if(!ModelState.IsValid)
+            if(civm.State == 1)
             {
-                return View("index", civm);
+                if(civm.ChosenCustomer.CustomerPhoto == null)
+                {
+                    Customer temp = await _dataService.GetCustomerByIdAsync(civm.ChosenCustomer.Id);
+                    civm.ChosenCustomer.CustomerPhoto = temp.CustomerPhoto;
+                    var stream = new MemoryStream(civm.ChosenCustomer.CustomerPhoto);
+                    civm.Img = new FormFile(stream, 0, civm.ChosenCustomer.CustomerPhoto.Length, $"{civm.ChosenCustomer.CustomerName}", $"{civm.ChosenCustomer.CustomerName}");
+                }
             }
             for(int i =0;i<civm.ChosenCustomer.CustomerAddresses.Count();i++)
             {

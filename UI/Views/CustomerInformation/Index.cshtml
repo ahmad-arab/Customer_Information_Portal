@@ -223,11 +223,7 @@
                                 else
                                 {
                                     <input asp-for="@Model.Img" type="file" class="form-control fileinput" />
-                                    @if(Model.State == 1)
-                                    {
-                                        <img  asp-for="@Model.Img" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.ChosenCustomer.CustomerPhoto)"
-                                            width="100" height="100" />
-                                    }
+                                    
                                 }
                             </div>
                         </div>  
@@ -307,7 +303,6 @@
         </div>
     </div>
 </div>
-    <input asp-for="@Model.Img" value="@Model.Img" hidden />
     <input asp-for="@Model.ChosenCustomer.Country.CountryName" hidden/>
     <input asp-for="@Model.ChosenCustomer.Id" hidden/>
     <input asp-for="@Model.State" hidden/>
