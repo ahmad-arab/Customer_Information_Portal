@@ -1,7 +1,7 @@
 # Customer_Information_Portal
 
 This is a simple Customer Information Portal<br/>
-1- The Frint-end is developed using MVC Core(6.0)<br/>
+1- The Front-end is developed using MVC Core(6.0)<br/>
 2- The Back-end is developed using Web API (6.0)<br/>
 3- The Database is an MSSQL Server database.<br/>
 <br/>
